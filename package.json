@@ -14,7 +14,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "git checkout -B gh-pages && git add -f build && git commit -am \"chore: deploy\" && git filter-branch -f --prune-empty --subdirectory-filter build && git push -f origin gh-pages && git checkout master"
   },
   "homepage": "http://danmconrad.github.io/kiosk-today"
 }
