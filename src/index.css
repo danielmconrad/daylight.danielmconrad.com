@@ -1,0 +1,15 @@
+body, html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: #f1faee;
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 300;
+}
+
+#root {
+  height: 100%;
+}

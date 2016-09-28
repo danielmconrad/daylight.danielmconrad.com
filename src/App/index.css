@@ -1,16 +1,8 @@
-body, html {
-  height: 100%;
+.App {
+  min-height: 100%;
 }
 
-body {
-  color: #f1faee;
-  background-color: #d63541;
-  font-family: 'Fira Sans', sans-serif;
-  font-weight: 300;
-}
-
-.app {
-  height: 100%;
+.App.clear-skies {
   letter-spacing: 0.1em;
   background: #cf343f;
   background: -webkit-radial-gradient(center, ellipse cover, #cf343f 0%,#842129 100%);
@@ -21,7 +13,7 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cf343f', endColorstr='#842129',GradientType=1 );
 }
 
-.app.will-rain {
+.App.will-rain {
   background: #3b6784;
   background: -webkit-radial-gradient(center, ellipse cover, #3b6784 0%,#254255 100%);
   background: -moz-radial-gradient(center, ellipse cover, #3b6784 0%, #254255 100%);
@@ -31,7 +23,7 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b6784', endColorstr='#254255',GradientType=1 );
 }
 
-.app.will-snow {
+.App.will-snow {
   background: #8fb9bb;
   background: -webkit-radial-gradient(center, ellipse cover, #8fb9bb 0%,#5c7778 100%);
   background: -moz-radial-gradient(center, ellipse cover, #8fb9bb 0%, #5c7778 100%);
@@ -39,79 +31,4 @@ body {
   background: -o-radial-gradient(center, ellipse cover, #8fb9bb 0%, #5c7778 100%);
   background: radial-gradient(ellipse at center, #8fb9bb 0%, #5c7778 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8fb9bb', endColorstr='#5c7778',GradientType=1 );
-}
-
-
-#top,
-#middle {
-  text-align: center;
-}
-
-#top {
-  padding: 170px 0 0;
-}
-
-#top .day {
-  font-size: 126px;
-  line-height: 1em;
-  letter-spacing: 0;
-}
-
-#top .date {
-  font-size: 48px;
-  opacity: 0.3;
-  line-height: 1em;
-  letter-spacing: 0.06em;
-  margin: 20px 0 0;
-}
-
-#top .time {
-  font-size: 148px;
-  margin: 30px 0 0;
-  letter-spacing: 0.04em;
-}
-
-#top .time .period {
-  font-size: 0.4em;
-}
-
-#middle {
-  margin: 180px 0 250px;
-}
-
-#middle .temperature {
-  font-size: 182px;
-}
-
-#bottom {
-  padding: 0 90px;
-}
-
-#chart {
-  width: 100%;
-  /*background: rgba(0, 0, 0, 0.3);*/
-}
-
-#chart text {
-  fill: rgba(255, 255, 255, 0.3);
-  font-size: 32px;
-}
-
-#chart text .small {
-  font-size: 0.6em;
-}
-
-#chart line {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.3);
-  stroke-width: 2;
-}
-
-#chart #time-marker {
-  stroke: rgba(255, 255, 255, 1);
-}
-
-#chart rect {
-  stroke: none;
-  fill: rgba(255, 255, 255, 0.3);
 }

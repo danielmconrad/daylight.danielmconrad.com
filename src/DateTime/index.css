@@ -1,0 +1,41 @@
+.DateTime {
+  text-align: center;
+}
+
+.DateTime {
+  padding: 170px 0 0;
+}
+
+.DateTime .day {
+  font-size: 126px;
+  line-height: 1em;
+  letter-spacing: 0;
+}
+
+.DateTime .date {
+  font-size: 48px;
+  opacity: 0.3;
+  line-height: 1em;
+  letter-spacing: 0.06em;
+  margin: 20px 0 0;
+}
+
+.DateTime .time {
+  font-size: 148px;
+  margin: 30px 0 0;
+  letter-spacing: 0.04em;
+}
+
+.DateTime .hide {
+  visibility: hidden;
+}
+
+.DateTime .sep {
+  vertical-align: middle;
+  margin-top: -0.15em;
+  display: inline-block;
+}
+
+.DateTime .time .period {
+  font-size: 0.4em;
+}
