@@ -25,7 +25,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
     setInterval(this.setWeather, 60000);
     this.setWeather();
   }
