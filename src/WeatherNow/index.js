@@ -3,6 +3,8 @@ import './index.css';
 
 class WeatherNow extends Component {
   render() {
+    const { weather } = this.props;
+
     return (
       <div className="WeatherNow">
         <div className="temperature">

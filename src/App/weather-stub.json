@@ -1,0 +1,43 @@
+{
+  "coord": {
+    "lon": -87.78,
+    "lat": 41.89
+  },
+  "weather": [{
+    "id": 501,
+    "main": "Rain",
+    "description": "moderate rain",
+    "icon": "10n"
+  }],
+  "base": "stations",
+  "main": {
+    "temp": 57.9,
+    "pressure": 1017,
+    "humidity": 89,
+    "temp_min": 55,
+    "temp_max": 59
+  },
+  "wind": {
+    "speed": 1.14,
+    "deg": 12,
+    "gust": 3.6
+  },
+  "rain": {
+    "1h": 1.91
+  },
+  "clouds": {
+    "all": 88
+  },
+  "dt": 1475107204,
+  "sys": {
+    "type": 3,
+    "id": 9216,
+    "message": 0.1925,
+    "country": "US",
+    "sunrise": 1475149588,
+    "sunset": 1475192117
+  },
+  "id": 4904381,
+  "name": "Oak Park",
+  "cod": 200
+}
