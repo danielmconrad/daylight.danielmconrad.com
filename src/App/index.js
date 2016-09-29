@@ -3,14 +3,12 @@ import React, { Component } from 'react';
 import './index.css';
 import DateTime from '../DateTime';
 import WeatherNow from '../WeatherNow';
-import WeatherChart from '../WeatherChart';
+import WeatherForecast from '../WeatherForecast';
 
-import weatherStub from './weather-stub';
+// import nowStub from './stubs/now';
+// import forecastStub from './stubs/forecast';
 
-// const WEATHER_ENDPOINT = 'http://api.openweathermap.org/data/2.5/weather?APPID=1bfa54cd8bbaba80515c3a7afd5b733b&units=imperial&zip=60618,US';
-
-
-// http://openweathermap.org/forecast5#5days
+const WEATHER_API = 'http://api.openweathermap.org/data/2.5';
 
 class App extends Component {
 
@@ -19,26 +17,42 @@ class App extends Component {
     this.setWeather = this.setWeather.bind(this);
 
     this.state = {
-      weather: null,
+      weather: {
+        now: null,
+        forecast: null,
+      },
     };
-
-    this.setWeather();
-  }
-
-  setWeather() {
-    this.setState({ weather: weatherStub });
-    // fetch(new Request(WEATHER_ENDPOINT)).then((result) => {
-    //   console.log(result);
-    // });
   }
 
   componentDidMount() {
     setInterval(this.setWeather, 60000);
+    this.setWeather();
   }
 
   componentWillUnmount() {
     clearInterval(this.setWeather);
   }
+
+  setWeather() {
+    // Promise.resolve({ now: nowStub, forecast: forecastStub }).then((weather) => this.setState({ weather }));
+    this.getWeatherRequests().then((weather) => this.setState({ weather }));
+  }
+
+  getWeatherRequests() {
+    const { token, lat, lng } = this.props.params;
+
+    const params = `?APPID=${token}&units=imperial&lat=${lat}&lon=${lng}`;
+    const nowEndpoint = `${WEATHER_API}/weather${params}`;
+    const forecastEndpoint = `${WEATHER_API}/forecast${params}`;
+
+    return Promise.all([
+      fetch(new Request(nowEndpoint)),
+      fetch(new Request(forecastEndpoint)),
+    ])
+    .then((requests) => Promise.all(requests.map((req) => req.json()))
+    .then(([now, forecast]) => ({ now, forecast })));
+  }
+
   render() {
     let appClassNames = ['App'];
 
@@ -51,8 +65,8 @@ class App extends Component {
     return (
       <div className={appClassNames.join(' ')}>
         <DateTime />
-        <WeatherNow weather={this.state.weather} />
-        <WeatherChart weather={this.state.weather} />
+        <WeatherNow now={this.state.weather.now} units="F" />
+        <WeatherForecast forecast={this.state.weather.forecast} units="F" />
       </div>
     );
   }
