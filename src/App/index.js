@@ -53,14 +53,29 @@ class App extends Component {
     .then(([now, forecast]) => ({ now, forecast })));
   }
 
-  render() {
-    let appClassNames = ['App'];
+  getColorClassName() {
+    if (!this.state.weather || !this.state.weather.now) return 'clear-skies';
 
-    if (true) {
-      appClassNames.push('will-snow');
-    } else {
-      appClassNames.push('clear-skies');
+    const { id } = this.state.weather.now.weather[0];
+
+    switch (true) {
+      case (200 <= id && id <= 599):
+      case (id === 701):
+      case (id === 901):
+      case (id === 902):
+      case (id === 906):
+        return 'will-rain';
+
+      case (600 <= id && id <= 699):
+        return 'will-snow';
+
+      default:
+        return 'clear-skies';
     }
+  }
+
+  render() {
+    let appClassNames = ['App'].concat(this.getColorClassName());
 
     return (
       <div className={appClassNames.join(' ')}>
