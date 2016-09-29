@@ -7,7 +7,7 @@ import './index.css';
 
 ReactDOM.render(
   <Router history={browserHistory}>
-    <Route path="/:token/:lat/:lng" component={App} />
+    <Route path="/" component={App} />
   </Router>
   , document.getElementById('root')
 );

@@ -25,6 +25,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     setInterval(this.setWeather, 60000);
     this.setWeather();
   }
@@ -39,7 +40,7 @@ class App extends Component {
   }
 
   getWeatherRequests() {
-    const { token, lat, lng } = this.props.params;
+    const { token, lat, lng } = this.props.location.query;
 
     const params = `?APPID=${token}&units=imperial&lat=${lat}&lon=${lng}`;
     const nowEndpoint = `${WEATHER_API}/weather${params}`;
