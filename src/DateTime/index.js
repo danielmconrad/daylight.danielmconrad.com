@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
-import './index.css';
+import styles from './index.css';
 
 class DateTime extends Component {
+
+  static propTypes = {
+    className: React.PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: '',
+  };
 
   constructor() {
     super();
@@ -31,15 +39,25 @@ class DateTime extends Component {
 
   render() {
     const { momentTime, isHalfTick } = this.state;
+    let seperatorClassNames = [styles.seperator];
+
+    if (isHalfTick) seperatorClassNames.push(styles.hide);
 
     return (
-      <div className="DateTime">
-        <div className="day">{momentTime.format('dddd')}</div>
-        <div className="date">{momentTime.format('MMMM Do')}</div>
-        <div className="time">
-          {momentTime.format('h')}<span className={isHalfTick ? 'sep hide' : 'sep'}>:</span>{momentTime.format('mm')}
-          <span className="period">{momentTime.format('A')}</span></div>
-        <h1></h1>
+      <div className={[styles.DateTime, this.props.className].join(' ')}>
+        <div className={styles.date}>
+          {momentTime.format('dddd, MMMM Do')}
+        </div>
+        <div className={styles.time}>
+          {momentTime.format('h')}
+          <span className={seperatorClassNames.join(' ')}>
+            :
+          </span>
+          {momentTime.format('mm')}
+          <span className={styles.period}>
+            {momentTime.format('A')}
+          </span>
+        </div>
       </div>
     );
   }

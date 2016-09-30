@@ -1,41 +1,31 @@
-.DateTime {
+:local .DateTime {
   text-align: center;
 }
 
-.DateTime {
-  padding: 170px 0 0;
-}
-
-.DateTime .day {
-  font-size: 126px;
-  line-height: 1em;
-  letter-spacing: 0;
-}
-
-.DateTime .date {
-  font-size: 48px;
+:local .date {
+  font-size: 4.8rem;
   opacity: 0.5;
   line-height: 1em;
   letter-spacing: 0.06em;
-  margin: 20px 0 0;
+  margin: 2.0rem 0 0;
 }
 
-.DateTime .time {
-  font-size: 148px;
-  margin: 30px 0 0;
+:local .time {
+  font-size: 14.8rem;
+  margin: 3rem 0 0;
   letter-spacing: 0.04em;
 }
 
-.DateTime .hide {
+:local .hide {
   visibility: hidden;
 }
 
-.DateTime .sep {
+:local .seperator {
   vertical-align: middle;
-  margin-top: -0.15em;
+  margin: -0.15em 0 0 -0.05em;
   display: inline-block;
 }
 
-.DateTime .time .period {
+:local .period {
   font-size: 0.4em;
 }

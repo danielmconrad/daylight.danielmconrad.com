@@ -1,5 +1,5 @@
 {
-  "name": "kiosk-today",
+  "name": "daylight",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -18,5 +18,5 @@
     "eject": "react-scripts eject",
     "deploy": "git checkout -B gh-pages && git add -f build && git commit -am \"chore: deploy\" && git filter-branch -f --prune-empty --subdirectory-filter build && git push -f origin gh-pages && git checkout master"
   },
-  "homepage": "http://danmconrad.github.io/kiosk-today"
+  "homepage": "http://danmconrad.github.io/daylight"
 }

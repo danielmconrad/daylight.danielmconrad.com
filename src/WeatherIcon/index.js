@@ -9,21 +9,31 @@ import React, { Component } from 'react';
 class WeatherIcon extends Component {
 
   static propTypes = {
+    className: React.PropTypes.string,
     icon: React.PropTypes.string,
-  }
+  };
+
+  static defaultProps = {
+    className: '',
+    icon: null,
+  };
 
   getClassFromIcon(icon) {
     switch (true) {
       default:
-        return 'wi-rain';
+        return 'wi-day-sunny';
     }
   }
 
   render() {
-    const iconClass = this.getClassFromIcon(this.props.icon);
+    let classes = [
+      'wi',
+      this.getClassFromIcon(this.props.icon),
+      this.props.className,
+    ];
 
     return (
-      <i className={'wi ' + iconClass} />
+      <i className={classes.join(' ')} />
     );
   }
 }

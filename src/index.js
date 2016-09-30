@@ -9,6 +9,7 @@ import './styles/index.css';
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="*" component={App} />
+    <Route path="*/:orientation" component={App} />
   </Router>
   , document.getElementById('root')
 );

@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
-import './index.css';
+import styles from './index.css';
 
 class WeatherForecast extends Component {
+
+  static propTypes = {
+    className: React.PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: '',
+  };
+
   render() {
     //<!--
     //   min: 68   =    180px (always)
@@ -28,24 +37,24 @@ class WeatherForecast extends Component {
     // <!-- text x = 000 -->
 
     return (
-      <div className="WeatherForecast">
-        <svg viewBox="-40 0 1040 330" xmlns="http://www.w3.org/2000/svg">
-          <g className="legend">
+      <div className={[styles.WeatherForecast, this.props.className].join(' ')}>
+        <svg className={styles.svg} viewBox="-40 0 1040 330" xmlns="http://www.w3.org/2000/svg">
+          <g className={styles.legend}>
             <line id="bottom-line" x1="0" x2="960" y1="235" y2="235" />
-            <line id="time-marker" x1="280" x2="280" y1="210" y2="260" />
-            <text x="000" y="295" textAnchor="middle">12<tspan className="small">AM</tspan></text>
-            <text x="160" y="295" textAnchor="middle">4<tspan className="small">AM</tspan></text>
-            <text x="320" y="295" textAnchor="middle">8<tspan className="small">AM</tspan></text>
-            <text x="480" y="295" textAnchor="middle">12<tspan className="small">PM</tspan></text>
-            <text x="640" y="295" textAnchor="middle">4<tspan className="small">PM</tspan></text>
-            <text x="800" y="295" textAnchor="middle">8<tspan className="small">PM</tspan></text>
-            <text x="960" y="295" textAnchor="middle">12<tspan className="small">AM</tspan></text>
+            <line className={styles.timeMarker} x1="280" x2="280" y1="210" y2="260" />
+            <text x="000" y="295" textAnchor="middle">12<tspan className={styles.small}>AM</tspan></text>
+            <text x="160" y="295" textAnchor="middle">4<tspan className={styles.small}>AM</tspan></text>
+            <text x="320" y="295" textAnchor="middle">8<tspan className={styles.small}>AM</tspan></text>
+            <text x="480" y="295" textAnchor="middle">12<tspan className={styles.small}>PM</tspan></text>
+            <text x="640" y="295" textAnchor="middle">4<tspan className={styles.small}>PM</tspan></text>
+            <text x="800" y="295" textAnchor="middle">8<tspan className={styles.small}>PM</tspan></text>
+            <text x="960" y="295" textAnchor="middle">12<tspan className={styles.small}>AM</tspan></text>
           </g>
-          <g className="precipitation">
+          <g className={styles.precipitation}>
             <rect x="40" width="40" y="225" height="10"/>
             <rect x="80" width="40" y="215" height="20"/>
           </g>
-          <g className="temps">
+          <g className={styles.temps}>
             <text x="000" y="092" textAnchor="middle">73°F</text>
             <line x1="0" x2="0" y1="122" y2="122" />
 

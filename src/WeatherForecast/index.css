@@ -1,43 +1,52 @@
-.WeatherForecast {
+:local .WeatherForecast {
   padding: 0 90px;
 }
 
-.WeatherForecast svg {
+:local .WeatherForecast svg {
   width: 100%;
 }
 
-.WeatherForecast text {
+:local .svg text {
   fill: rgba(255, 255, 255, 0.5);
   font-size: 32px;
 }
 
-.WeatherForecast text .small {
-  font-size: 0.6em;
-}
-
-.WeatherForecast rect {
+:local .svg rect {
   stroke: none;
   fill: rgba(255, 255, 255, 0.5);
 }
 
-.WeatherForecast line {
+:local .svg line {
   fill: none;
   stroke: rgba(255, 255, 255, 0.5);
   stroke-width: 2;
 }
 
-.WeatherForecast .legend line {
+:local .legend {
+}
+
+:local .legend line {
   stroke: rgba(255, 255, 255, 0.3);
 }
 
-.WeatherForecast .legend text {
+:local .legend text {
   fill: rgba(255, 255, 255, 0.3);
 }
 
-.WeatherForecast .legend #time-marker {
-  stroke: rgba(255, 255, 255, 1);
+:local .precipitation {
 }
 
-.WeatherForecast .precipitation rect {
+:local .precipitation rect {
   fill: rgba(255, 255, 255, 0.2);
+}
+
+:local .temps {
+}
+
+:local .small {
+  font-size: 0.6em;
+}
+
+:local .timeMarker {
+  stroke: rgba(255, 255, 255, 1);
 }
