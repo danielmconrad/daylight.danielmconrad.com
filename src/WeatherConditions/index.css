@@ -1,0 +1,13 @@
+:local .WeatherConditions {
+  text-align: center;
+}
+
+:local .temperature {
+  font-size: 18.2rem;
+}
+
+:local .icon {
+  font-size: 0.7em !important;
+  margin-top: -0.2em;
+  vertical-align: middle;
+}
