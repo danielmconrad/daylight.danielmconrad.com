@@ -54,6 +54,7 @@ class App extends Component {
       this.setState({ conditions: conditionsStub });
     } else {
       fetch(this.getWeatherEndpoints().conditions)
+        .then((response) => response.json())
         .then((conditions) => this.setState({ conditions }));
     }
   }
@@ -63,6 +64,7 @@ class App extends Component {
       this.setState({ forecast: forecastStub });
     } else {
       fetch(this.getWeatherEndpoints().forecast)
+        .then((response) => response.json())
         .then((forecast) => this.setState({ forecast }));
     }
   }
