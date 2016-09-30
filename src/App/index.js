@@ -2,30 +2,36 @@ import React, { Component } from 'react';
 
 import './index.css';
 import DateTime from '../DateTime';
-import WeatherNow from '../WeatherNow';
-import WeatherForecast from '../WeatherForecast';
+import WeatherCurrent from '../WeatherCurrent';
+// import WeatherForecast from '../WeatherForecast';
 
-// import nowStub from './stubs/now';
+// import currentStub from './stubs/current';
 // import forecastStub from './stubs/forecast';
 
-const WEATHER_API = 'http://api.openweathermap.org/data/2.5';
+const ONE_MINUTE = 1000 * 60;
+const ONE_HOUR = 60 * ONE_MINUTE;
+
+const WEATHER_API = 'https://api.wunderground.com/api';
+const WEATHER_TOKEN = 'cc057fa0be3e146f';
 
 class App extends Component {
 
   constructor() {
     super();
+    this.refreshSite = this.refreshSite.bind(this);
     this.setWeather = this.setWeather.bind(this);
 
     this.state = {
       weather: {
-        now: null,
+        current: null,
         forecast: null,
       },
     };
   }
 
   componentDidMount() {
-    setInterval(this.setWeather, 60000);
+    setInterval(this.refreshSite, 24 * ONE_HOUR);
+    setInterval(this.setWeather, 10 * ONE_MINUTE);
     this.setWeather();
   }
 
@@ -34,54 +40,52 @@ class App extends Component {
   }
 
   setWeather() {
-    // Promise.resolve({ now: nowStub, forecast: forecastStub }).then((weather) => this.setState({ weather }));
-    this.getWeatherRequests().then((weather) => this.setState({ weather }));
+    // Promise.resolve({ current: currentStub, forecast: forecastStub })
+    //   .then((weather) => this.setState({ weather }));
+    this.getWeatherRequests()
+      .then((weather) => this.setState({ weather }));
+  }
+
+  refreshSite() {
+    window.location.reload();
   }
 
   getWeatherRequests() {
-    const { token, lat, lng } = this.props.location.query;
+    let { token, zipCode } = this.props.location.query;
+    token = token || WEATHER_TOKEN;
 
-    const params = `?APPID=${token}&units=imperial&lat=${lat}&lon=${lng}`;
-    const nowEndpoint = `${WEATHER_API}/weather${params}`;
-    const forecastEndpoint = `${WEATHER_API}/forecast${params}`;
+    // http://api.wunderground.com/api/TOKEN/conditions/q/ZIP.json
+    // http://api.wunderground.com/api/TOKEN/forecast/q/ZIP.json
+    // http://api.wunderground.com/api/TOKEN/history_YYYYMMDD/q/ZIP.json
+
+    const currentEndpoint = `${WEATHER_API}/${token}/conditions/q/${zipCode}.json`;
+    const forecastEndpoint = `${WEATHER_API}/${token}/forecast/q/${zipCode}.json`;
+    // const historyEndpoint = `${WEATHER_API}/${token}/history_/q/${zipCode}.json`;
 
     return Promise.all([
-      fetch(new Request(nowEndpoint)),
+      fetch(new Request(currentEndpoint)),
       fetch(new Request(forecastEndpoint)),
     ])
     .then((requests) => Promise.all(requests.map((req) => req.json()))
-    .then(([now, forecast]) => ({ now, forecast })));
+    .then(([current]) => ({ current }))); //forecast
   }
 
   getColorClassName() {
-    if (!this.state.weather || !this.state.weather.now) return 'clear-skies';
-
-    const { id } = this.state.weather.now.weather[0];
-
-    switch (true) {
-      case (200 <= id && id <= 599):
-      case (id === 701):
-      case (id === 901):
-      case (id === 902):
-      case (id === 906):
-        return 'will-rain';
-
-      case (600 <= id && id <= 699):
-        return 'will-snow';
-
-      default:
-        return 'clear-skies';
-    }
+    return 'clear-skies';
   }
 
   render() {
     let appClassNames = ['App'].concat(this.getColorClassName());
 
+    const { current } = this.state.weather; //forecast
+    let { units } = this.props.location.query;
+
+    // <WeatherForecast forecast={forecast} units={units} />
+
     return (
       <div className={appClassNames.join(' ')}>
         <DateTime />
-        <WeatherNow now={this.state.weather.now} units="F" />
-        <WeatherForecast forecast={this.state.weather.forecast} units="F" />
+        <WeatherCurrent current={current} units={units} />
       </div>
     );
   }

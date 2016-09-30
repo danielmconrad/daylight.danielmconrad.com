@@ -1,8 +1,8 @@
-.WeatherNow {
+.WeatherCurrent {
   text-align: center;
   margin: 180px 0 250px;
 }
 
-.WeatherNow .temperature {
+.WeatherCurrent .temperature {
   font-size: 182px;
 }

@@ -3,14 +3,13 @@
 }
 
 .App.clear-skies {
-  letter-spacing: 0.1em;
-  background: #cf343f;
-  background: -webkit-radial-gradient(center, ellipse cover, #cf343f 0%,#842129 100%);
-  background: -moz-radial-gradient(center, ellipse cover, #cf343f 0%, #842129 100%);
-  background: -ms-radial-gradient(center, ellipse cover, #cf343f 0%, #842129 100%);
-  background: -o-radial-gradient(center, ellipse cover, #cf343f 0%, #842129 100%);
-  background: radial-gradient(ellipse at center, #cf343f 0%, #842129 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cf343f', endColorstr='#842129',GradientType=1 );
+  background: #8fb9bb;
+  background: -webkit-radial-gradient(center, ellipse cover, #8fb9bb 0%,#5c7778 100%);
+  background: -moz-radial-gradient(center, ellipse cover, #8fb9bb 0%, #5c7778 100%);
+  background: -ms-radial-gradient(center, ellipse cover, #8fb9bb 0%, #5c7778 100%);
+  background: -o-radial-gradient(center, ellipse cover, #8fb9bb 0%, #5c7778 100%);
+  background: radial-gradient(ellipse at center, #8fb9bb 0%, #5c7778 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8fb9bb', endColorstr='#5c7778',GradientType=1 );
 }
 
 .App.will-rain {
@@ -23,12 +22,13 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b6784', endColorstr='#254255',GradientType=1 );
 }
 
-.App.will-snow {
-  background: #8fb9bb;
-  background: -webkit-radial-gradient(center, ellipse cover, #8fb9bb 0%,#5c7778 100%);
-  background: -moz-radial-gradient(center, ellipse cover, #8fb9bb 0%, #5c7778 100%);
-  background: -ms-radial-gradient(center, ellipse cover, #8fb9bb 0%, #5c7778 100%);
-  background: -o-radial-gradient(center, ellipse cover, #8fb9bb 0%, #5c7778 100%);
-  background: radial-gradient(ellipse at center, #8fb9bb 0%, #5c7778 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8fb9bb', endColorstr='#5c7778',GradientType=1 );
+.App.weekend {
+  letter-spacing: 0.1em;
+  background: #cf343f;
+  background: -webkit-radial-gradient(center, ellipse cover, #cf343f 0%,#842129 100%);
+  background: -moz-radial-gradient(center, ellipse cover, #cf343f 0%, #842129 100%);
+  background: -ms-radial-gradient(center, ellipse cover, #cf343f 0%, #842129 100%);
+  background: -o-radial-gradient(center, ellipse cover, #cf343f 0%, #842129 100%);
+  background: radial-gradient(ellipse at center, #cf343f 0%, #842129 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cf343f', endColorstr='#842129',GradientType=1 );
 }
