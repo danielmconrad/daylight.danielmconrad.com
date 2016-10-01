@@ -23,9 +23,9 @@
 }
 
 :local .clear {
-  background: #8fb9bb;
-  background: radial-gradient(center, ellipse cover, #8fb9bb 0%, #5c7778 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8fb9bb', endColorstr='#5c7778', GradientType=1 );
+  background: #648788;
+  background: radial-gradient(center, ellipse cover, #648788 0%, #435657 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#648788', endColorstr='#435657', GradientType=1 );
 }
 
 :local .rain {

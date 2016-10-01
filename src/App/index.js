@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 import styles from './index.css';
 
@@ -94,19 +95,35 @@ class App extends Component {
     return this.props.location.query.units || 'imperial';
   }
 
-  getColorClassName() {
-    if (!this.state.conditions) return styles.clear;
+  getConditionsClassName() {
+    const willPrecipitate = this.getWillPrecipSoon();
+    const isWeekend = moment().day() === 0 || moment().day() === 6;
 
-    const { precip_today_metric } = this.state.conditions.current_observation;
-    const precip = parseFloat(precip_today_metric);
+    switch (true) {
+      case willPrecipitate: return styles.rain;
+      case isWeekend: return styles.weekend;
+      default: return styles.clear;
+    }
+  }
 
-    if (precip > 0) return styles.rain;
+  getWillPrecipSoon() {
+    if (!this.state.hourly) return false;
 
-    return styles.clear;
+    let willPrecipitate = false;
+
+    this.state.hourly.hourly_forecast.slice(0, 12).forEach((hour) => {
+      if (parseFloat(hour.qpf.metric) > 0) {
+        willPrecipitate = true;
+        console.log(hour);
+      }
+    });
+
+    return willPrecipitate;
   }
 
   render() {
-    let appClassNames = [styles.App].concat(this.getColorClassName());
+    const conditionsClass = this.getConditionsClassName();
+    const appClassNames = [styles.App, conditionsClass];
 
     const token = this.getToken();
     const units = this.getUnits();
