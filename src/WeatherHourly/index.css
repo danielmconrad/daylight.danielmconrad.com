@@ -1,22 +1,17 @@
 :local .WeatherHourly {
-  padding: 0 90px;
-}
-
-:local .WeatherHourly svg {
   width: 100%;
 }
 
-:local .svg text {
+:local .WeatherHourly text {
   fill: rgba(255, 255, 255, 0.7);
-  font-size: 32px;
 }
 
-:local .svg rect {
+:local .WeatherHourly rect {
   stroke: none;
   fill: rgba(255, 255, 255, 0.5);
 }
 
-:local .svg line {
+:local .WeatherHourly line {
   fill: none;
   stroke: rgba(255, 255, 255, 0.5);
   stroke-width: 2;

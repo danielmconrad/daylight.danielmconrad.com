@@ -9,8 +9,6 @@ import './styles/index.css';
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/daylight/" component={App} />
-    <Route path="/daylight/:token" component={App} />
-    <Route path="/daylight/:orientation/:token" component={App} />
   </Router>
   , document.getElementById('root')
 );

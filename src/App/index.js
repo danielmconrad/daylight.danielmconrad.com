@@ -119,7 +119,7 @@ class App extends Component {
           <p className={styles.noToken}>Where's your token?</p>
         }
         {token &&
-          <div>
+          <div className={styles.container}>
             <DateTime
               className={styles.DateTime}
             />

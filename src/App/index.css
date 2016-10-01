@@ -1,6 +1,25 @@
 :local .App {
-  height: calc(100% - 44rem);
-  padding: 22.0rem 0;
+  padding: 1em 0.5em;
+  height: calc(100% - 2em);
+  width: calc(100% - 1em);
+  font-size: 4rem;
+}
+
+@media (min-width: 320px) { :local .App { font-size: 6rem; } }
+@media (min-width: 375px) { :local .App { font-size: 8rem; } }
+@media (min-width: 520px) { :local .App { font-size: 11rem; } }
+@media (min-width: 768px) { :local .App { font-size: 14rem; } }
+@media (min-width: 800px) { :local .App { font-size: 16rem; } }
+@media (min-width: 1080px) { :local .App { font-size: 18rem; } }
+@media (min-width: 1280px) { :local .App { font-size: 22rem; } }
+@media (min-width: 1440px) { :local .App { font-size: 27rem; } }
+@media (min-width: 1920px) { :local .App { font-size: 31rem; } }
+@media (min-width: 2160px) { :local .App { font-size: 36rem; } }
+
+:local .container {
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 :local .clear {
@@ -21,15 +40,26 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cf343f', endColorstr='#842129', GradientType=1 );
 }
 
+:local .DateTime,
+:local .WeatherConditions,
+:local .WeatherHourly {
+  position: absolute;
+  width: 100%;
+}
+
 :local .DateTime {
-  margin-bottom: 28.0rem;
+  top: 0;
 }
 
 :local .WeatherConditions {
-  margin-bottom: 28.0rem;
+  font-size: 0.83em;
+  margin-top: -0.5em;
+  top: 50%;
 }
 
 :local .WeatherHourly {
+  font-size: 0.2em;
+  bottom: 0;
 }
 
 :local .noToken {
