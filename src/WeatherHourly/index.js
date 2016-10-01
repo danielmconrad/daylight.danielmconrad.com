@@ -51,7 +51,7 @@ class WeatherHourly extends Component {
     let hours = [];
 
     this.getHours().forEach((hour, i) => {
-      if (i % 4 === 0 && hours.length < 7) hours.push(hour);
+      if (i % 2 === 0 && hours.length < 7) hours.push(hour);
     });
 
     return this.getRollingHours(hours, 'temp', TEMP_WIDTH, TEMP_TOP, TEMP_BOTTOM);
