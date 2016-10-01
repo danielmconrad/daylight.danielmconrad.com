@@ -48,7 +48,7 @@ class WeatherHourly extends Component {
     let spreadTemp = maxTemp - minTemp;
 
     return hours.map((hour, i) => {
-      const y = (((hour.temp - minTemp) / spreadTemp) * 80) + 100;
+      const y = (((hour.temp - minTemp) / spreadTemp) * -120) + 220;
 
       return Object.assign(hour, {
         y: y,
@@ -63,13 +63,11 @@ class WeatherHourly extends Component {
     const unitFormat = this.props.units === 'celcius' ? 'C' : 'F';
     const hours = this.getHours();
 
-    // <line className={styles.timeMarker} x1="280" x2="280" y1="210" y2="260" />
-
     return (
       <div className={[styles.WeatherHourly, this.props.className].join(' ')}>
         <svg className={styles.svg} viewBox="-40 0 1040 330" xmlns="http://www.w3.org/2000/svg">
           <g className={styles.legend}>
-            <line id="bottom-line" x1="0" x2="960" y1="235" y2="235" />
+            <line id="bottom-line" x1="-20" x2="980" y1="235" y2="235" />
             {hours.map((hour, i) => {
               return <text key={i} x={hour.x} y="295" textAnchor="middle">{hour.mDate.format('hh')}
                 <tspan className={styles.small}>{hour.mDate.format('A')}</tspan>
@@ -90,7 +88,7 @@ class WeatherHourly extends Component {
           <g className={styles.temps}>
             {hours.map((hour, i) => {
               return <g key={i}>
-                <text x={hour.x} y={hour.y - 80} textAnchor="middle">{hour.temp}°{unitFormat}</text>
+                <text x={hour.x} y={hour.y - 50} textAnchor="middle">{hour.temp}°{unitFormat}</text>
                 <line x1={hour.xPrev} x2={hour.x} y1={hour.yPrev} y2={hour.y} />
               </g>;
             })}

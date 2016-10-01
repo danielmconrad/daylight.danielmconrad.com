@@ -1,6 +1,5 @@
 :local .App {
-  height: 100%;
-  flex: 1;
+  height: calc(100% - 44rem);
   padding: 22.0rem 0;
 }
 

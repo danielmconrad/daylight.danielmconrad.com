@@ -7,7 +7,7 @@
 }
 
 :local .svg text {
-  fill: rgba(255, 255, 255, 0.5);
+  fill: rgba(255, 255, 255, 0.7);
   font-size: 32px;
 }
 
@@ -27,10 +27,6 @@
 
 :local .legend line {
   stroke: rgba(255, 255, 255, 0.3);
-}
-
-:local .legend text {
-  fill: rgba(255, 255, 255, 0.3);
 }
 
 :local .precipitation {
