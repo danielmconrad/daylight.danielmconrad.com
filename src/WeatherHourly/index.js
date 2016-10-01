@@ -3,6 +3,14 @@ import moment from 'moment';
 
 import styles from './index.css';
 
+const LEGEND_LINE_PX = 235;
+const TEMP_WIDTH = 160;
+const TEMP_TOP = 100;
+const TEMP_BOTTOM = 200;
+const PRECIP_WIDTH = 40;
+const PRECIP_TOP = 175;
+const PRECIP_BOTTOM = LEGEND_LINE_PX;
+
 class WeatherHourly extends Component {
 
   static propTypes = {
@@ -18,78 +26,124 @@ class WeatherHourly extends Component {
   };
 
   getHours() {
-    let hours = [];
+    if(!this.props.weather || !this.props.weather.hourly_forecast) return [];
 
-    const { hourly_forecast } = this.props.weather;
+    const isCelcius = this.props.units === 'celcius';
+    const unitFormat = isCelcius ? 'C' : 'F';
+    const unitKey = isCelcius ? 'metric' : 'english';
 
-    for (let i = 0; i < hourly_forecast.length; i += 4) {
-      hours.push(hourly_forecast[i]);
-    }
-
-    let maxTemp = -Infinity;
-    let minTemp = Infinity;
-
-    hours = hours.map((hour, index) => {
-      const { english, metric } = hour.temp;
-      const temp = parseInt(this.props.units === 'imperial' ? english : metric, 10);
-
-      if (minTemp > temp) minTemp = temp;
-      if (maxTemp < temp) maxTemp = temp;
+    return this.props.weather.hourly_forecast.map((hour, index) => {
+      const temp = parseInt(hour.temp[unitKey], 10);
+      const precip = parseFloat(hour.qpf[unitKey], 10);
+      const mDate = moment(parseInt(hour.FCTTIME.epoch + '000', 10));
 
       return {
-        mDate: moment(parseInt(hour.FCTTIME.epoch + '000', 10)),
+        mDate: mDate,
         temp: temp,
+        tempString: `${temp}°${unitFormat}`,
+        precip: precip,
         icon: hour.icon,
-        x: index * 160,
-        xPrev: Math.max((index - 1) * 160, 0),
       };
     });
+  }
 
-    let spreadTemp = maxTemp - minTemp;
+  getTemperatures() {
+    let hours = [];
 
-    return hours.map((hour, i) => {
-      const y = (((hour.temp - minTemp) / spreadTemp) * -120) + 220;
+    this.getHours().forEach((hour, i) => {
+      if (i % 4 === 0 && hours.length < 7) hours.push(hour);
+    });
 
-      return Object.assign(hour, {
-        y: y,
-        yPrev: (i === 0 ? y : hours[i-1].y),
-      });
-    }).slice(0, 7);
+    return this.getRollingHours(hours, 'temp', TEMP_WIDTH, TEMP_TOP, TEMP_BOTTOM);
+  }
+
+  getPrecipitations() {
+    let hours = this.getHours().slice(0, 24);
+
+    return this.getRollingHours(hours, 'precip', PRECIP_WIDTH, PRECIP_TOP, PRECIP_BOTTOM);
+  }
+
+  getRollingHours(hours, metricKey, xWidth, yTop, yBottom) {
+    let max = -Infinity;
+    let min = Infinity;
+
+    hours.forEach((hour) => {
+      if (min > hour[metricKey]) min = hour[metricKey];
+      if (max < hour[metricKey]) max = hour[metricKey];
+    });
+
+    let spread = Math.max(max - min, 1);
+
+    return hours.map((hour, index) => {
+      const metric = hour[metricKey];
+      const x = index * xWidth;
+      const xPrev = (index === 0 ? hour.x : hours[index - 1].x);
+      const y = Math.ceil(((metric - min) / spread) * (yTop - yBottom) + yBottom);
+      const yPrev = (index === 0 ? y : hours[index - 1].y);
+      const height = Math.max(Math.ceil(yBottom - y) - 1, 0);
+
+      return Object.assign(hour, { x, xPrev, y, yPrev, height });
+    });
   }
 
   render() {
-    if (!this.props.weather) return null;
+    const temperatures = this.getTemperatures();
+    const precipitations = this.getPrecipitations();
 
-    const unitFormat = this.props.units === 'celcius' ? 'C' : 'F';
-    const hours = this.getHours();
+    console.log(precipitations);
+
+    if (!temperatures && !precipitations) return null;
 
     return (
       <div className={[styles.WeatherHourly, this.props.className].join(' ')}>
-        <svg className={styles.svg} viewBox="-40 0 1040 330" xmlns="http://www.w3.org/2000/svg">
+        <svg className={styles.svg}
+          viewBox="-40 0 1040 330"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+
+          {/* LEGEND */}
           <g className={styles.legend}>
-            <line id="bottom-line" x1="-20" x2="980" y1="235" y2="235" />
-            {hours.map((hour, i) => {
-              return <text key={i} x={hour.x} y="295" textAnchor="middle">{hour.mDate.format('hh')}
-                <tspan className={styles.small}>{hour.mDate.format('A')}</tspan>
+            <line
+              id="bottom-line"
+              x1="-20"
+              x2="980"
+              y1={LEGEND_LINE_PX}
+              y2={LEGEND_LINE_PX}
+            />
+            {temperatures.map(({ x, y, mDate }, i) => {
+              return <text
+                key={i}
+                x={x}
+                y={LEGEND_LINE_PX + 60}
+                textAnchor="middle"
+              >
+                {mDate.format('h')}
+                <tspan className={styles.small}>{mDate.format('A')}</tspan>
               </text>
             })}
           </g>
 
-          {/*
+          {/* PRECIPITATION */}
           <g className={styles.precipitation}>
-            {hours.map((hour, i) => {
+            {precipitations.map(({ x, y, height }, i) => {
               return <g key={i}>
-                <rect x="40" width="40" y="225" height="10" />
-                <rect x="80" width="40" y="215" height="20" />
+                <rect x={x} width={PRECIP_WIDTH} y={y} height={height} />
               </g>
             })}
           </g>
-          */}
+
+          {/* TEMPERATURES */}
           <g className={styles.temps}>
-            {hours.map((hour, i) => {
+            {temperatures.map(({ x, xPrev, y, yPrev, tempString}, i) => {
               return <g key={i}>
-                <text x={hour.x} y={hour.y - 50} textAnchor="middle">{hour.temp}°{unitFormat}</text>
-                <line x1={hour.xPrev} x2={hour.x} y1={hour.yPrev} y2={hour.y} />
+                <text
+                  x={x}
+                  y={y - 50}
+                  textAnchor="middle"
+                >
+                  {tempString}
+                </text>
+                <line x1={xPrev} x2={x} y1={yPrev} y2={y} />
               </g>;
             })}
           </g>
