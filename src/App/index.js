@@ -83,7 +83,7 @@ class App extends Component {
   }
 
   getToken() {
-    let { token } = this.props.params;
+    let token = this.props.params.token || this.props.location.query.token;
 
     if (IS_DEV && !token) token = WEATHER_TOKEN;
 
