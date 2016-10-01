@@ -15,7 +15,6 @@ const ONE_HOUR = 60 * ONE_MINUTE;
 
 const IS_DEV = process.env.NODE_ENV !== 'production';
 const WEATHER_API = 'https://api.wunderground.com/api';
-const WEATHER_TOKEN = IS_DEV ? '899c297f919cf33c' : null;
 
 class App extends Component {
 
@@ -32,7 +31,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    if(!this.getToken()) return;
+    if(!this.getToken() && !IS_DEV) return;
 
     setInterval(this.refreshSite, 24 * ONE_HOUR);
     setInterval(this.setConditions, 10 * ONE_MINUTE);
@@ -84,11 +83,7 @@ class App extends Component {
   }
 
   getToken() {
-    let token = this.props.params.token || this.props.location.query.token;
-
-    if (IS_DEV && !token) token = WEATHER_TOKEN;
-
-    return token;
+    return this.props.params.token || this.props.location.query.token;
   }
 
   getUnits() {
@@ -129,10 +124,9 @@ class App extends Component {
 
     return (
       <div className={appClassNames.join(' ')}>
-        {!token &&
+        {(!token && !IS_DEV) ?
           <p className={styles.noToken}>Where's your token?</p>
-        }
-        {token &&
+          :
           <div className={styles.container}>
             <DateTime
               className={styles.DateTime}
