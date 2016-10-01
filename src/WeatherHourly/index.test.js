@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WeatherForecast from './index';
+import WeatherHourly from './index';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<WeatherForecast />, div);
+  ReactDOM.render(<WeatherHourly />, div);
 });

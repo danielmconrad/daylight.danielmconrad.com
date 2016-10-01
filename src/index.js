@@ -8,8 +8,9 @@ import './styles/index.css';
 
 ReactDOM.render(
   <Router history={browserHistory}>
-    <Route path="*" component={App} />
-    <Route path="*/:orientation" component={App} />
+    <Route path="/daylight/" component={App} />
+    <Route path="/daylight/:token" component={App} />
+    <Route path="/daylight/:orientation/:token" component={App} />
   </Router>
   , document.getElementById('root')
 );

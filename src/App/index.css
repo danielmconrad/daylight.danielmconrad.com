@@ -30,5 +30,11 @@
   margin-bottom: 28.0rem;
 }
 
-:local .WeatherForecast {
+:local .WeatherHourly {
+}
+
+:local .noToken {
+  font-size: 11rem;
+  text-align: center;
+  padding: 0 15rem;
 }

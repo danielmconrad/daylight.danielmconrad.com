@@ -4,17 +4,17 @@ import styles from './index.css';
 
 import DateTime from '../DateTime';
 import WeatherConditions from '../WeatherConditions';
-import WeatherForecast from '../WeatherForecast';
+import WeatherHourly from '../WeatherHourly';
 
 import conditionsStub from './stubs/conditions';
-import forecastStub from './stubs/forecast';
+import hourlyStub from './stubs/hourly';
 
 const ONE_MINUTE = 1000 * 60;
 const ONE_HOUR = 60 * ONE_MINUTE;
 
 const IS_DEV = process.env.NODE_ENV !== 'production';
 const WEATHER_API = 'https://api.wunderground.com/api';
-const WEATHER_TOKEN = IS_DEV ? '899c297f919cf33c' : 'cc057fa0be3e146f';
+const WEATHER_TOKEN = IS_DEV ? '899c297f919cf33c' : null;
 
 class App extends Component {
 
@@ -22,27 +22,29 @@ class App extends Component {
     super();
     this.refreshSite = this.refreshSite.bind(this);
     this.setConditions = this.setConditions.bind(this);
-    this.setForecast = this.setForecast.bind(this);
+    this.setHourly = this.setHourly.bind(this);
 
     this.state = {
       conditions: null,
-      forecast: null,
+      hourly: null,
     };
   }
 
   componentDidMount() {
+    if(!this.getToken()) return;
+
     setInterval(this.refreshSite, 24 * ONE_HOUR);
     setInterval(this.setConditions, 10 * ONE_MINUTE);
-    setInterval(this.setForecast, 4 * ONE_HOUR);
+    setInterval(this.setHourly, 1 * ONE_HOUR);
 
     this.setConditions();
-    this.setForecast();
+    this.setHourly();
   }
 
   componentWillUnmount() {
     clearInterval(this.refreshSite);
     clearInterval(this.setConditions);
-    clearInterval(this.setForecast);
+    clearInterval(this.setHourly);
   }
 
   refreshSite() {
@@ -59,25 +61,37 @@ class App extends Component {
     }
   }
 
-  setForecast() {
+  setHourly() {
     if (IS_DEV) {
-      this.setState({ forecast: forecastStub });
+      this.setState({ hourly: hourlyStub });
     } else {
-      fetch(this.getWeatherEndpoints().forecast)
+      fetch(this.getWeatherEndpoints().hourly)
         .then((response) => response.json())
-        .then((forecast) => this.setState({ forecast }));
+        .then((hourly) => this.setState({ hourly }));
     }
   }
 
   getWeatherEndpoints() {
-    let { token, zipCode } = this.props.location.query;
-    token = token || WEATHER_TOKEN;
+    const location = this.props.location.query.zipCode || 'autoip';
+    const token = this.getToken();
 
     return {
-      conditions: `${WEATHER_API}/${token}/conditions/q/${zipCode}.json`,
-      forecast: `${WEATHER_API}/${token}/forecast/q/${zipCode}.json`,
-      history: `${WEATHER_API}/${token}/history_/q/${zipCode}.json`,
+      conditions: `${WEATHER_API}/${token}/conditions/q/${location}.json`,
+      hourly: `${WEATHER_API}/${token}/hourly/q/${location}.json`,
+      history: `${WEATHER_API}/${token}/history_/q/${location}.json`,
     };
+  }
+
+  getToken() {
+    let { token } = this.props.params;
+
+    if (IS_DEV && !token) token = WEATHER_TOKEN;
+
+    return token;
+  }
+
+  getUnits() {
+    return this.props.location.query.units || 'imperial';
   }
 
   getColorClassName() {
@@ -94,25 +108,33 @@ class App extends Component {
   render() {
     let appClassNames = [styles.App].concat(this.getColorClassName());
 
-    const { conditions, forecast } = this.state;
-    const { units } = this.props.location.query;
-    // const { orientation } = this.props.params || 'horizontal';
+    const token = this.getToken();
+    const units = this.getUnits();
+
+    const { conditions, hourly } = this.state;
 
     return (
       <div className={appClassNames.join(' ')}>
-        <DateTime
-          className={styles.DateTime}
-        />
-        <WeatherConditions
-          className={styles.WeatherConditions}
-          units={units}
-          weather={conditions}
-        />
-        <WeatherForecast
-          className={styles.WeatherForecast}
-          units={units}
-          weather={forecast}
-        />
+        {!token &&
+          <p className={styles.noToken}>Where's your token?</p>
+        }
+        {token &&
+          <div>
+            <DateTime
+              className={styles.DateTime}
+            />
+            <WeatherConditions
+              className={styles.WeatherConditions}
+              units={units}
+              weather={conditions}
+            />
+            <WeatherHourly
+              className={styles.WeatherHourly}
+              units={units}
+              weather={hourly}
+            />
+          </div>
+        }
       </div>
     );
   }

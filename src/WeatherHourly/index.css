@@ -1,8 +1,8 @@
-:local .WeatherForecast {
+:local .WeatherHourly {
   padding: 0 90px;
 }
 
-:local .WeatherForecast svg {
+:local .WeatherHourly svg {
   width: 100%;
 }
 
