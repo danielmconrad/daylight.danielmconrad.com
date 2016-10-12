@@ -8,7 +8,7 @@ import './styles/index.css';
 
 ReactDOM.render(
   <Router history={browserHistory}>
-    <Route path="/daylight/" component={App} />
+    <Route path="*" component={App} />
   </Router>
   , document.getElementById('root')
 );

@@ -34,7 +34,7 @@ class WeatherHourly extends Component {
 
     return this.props.weather.hourly_forecast.map((hour, index) => {
       const temp = parseInt(hour.temp[unitKey], 10);
-      const precip = parseFloat(hour.qpf[unitKey], 10);
+      const precip = parseFloat(hour.pop, 10);
       const mDate = moment(parseInt(hour.FCTTIME.epoch + '000', 10));
 
       return {
@@ -60,12 +60,12 @@ class WeatherHourly extends Component {
   getPrecipitations() {
     let hours = this.getHours().slice(0, 24);
 
-    return this.getRollingHours(hours, 'precip', PRECIP_WIDTH, PRECIP_TOP, PRECIP_BOTTOM);
+    return this.getRollingHours(hours, 'precip', PRECIP_WIDTH, PRECIP_TOP, PRECIP_BOTTOM, 0, 100);
   }
 
-  getRollingHours(hours, metricKey, xWidth, yTop, yBottom) {
-    let max = -Infinity;
-    let min = Infinity;
+  getRollingHours(hours, metricKey, xWidth, yTop, yBottom, min, max) {
+    max = max == null ? -Infinity : max;
+    min = min == null ? Infinity : min;
 
     hours.forEach((hour) => {
       if (min > hour[metricKey]) min = hour[metricKey];
