@@ -107,7 +107,7 @@ class App extends Component {
     let willPrecipitate = false;
 
     this.state.hourly.hourly_forecast.slice(0, 12).forEach((hour) => {
-      if (parseFloat(hour.qpf.metric) > 0) willPrecipitate = true;
+      if (parseFloat(hour.pop, 10) > 0) willPrecipitate = true;
     });
 
     return willPrecipitate;

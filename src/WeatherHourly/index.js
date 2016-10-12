@@ -8,7 +8,7 @@ const TEMP_WIDTH = 160;
 const TEMP_TOP = 100;
 const TEMP_BOTTOM = 200;
 const PRECIP_WIDTH = 40;
-const PRECIP_TOP = 175;
+const PRECIP_TOP = 150;
 const PRECIP_BOTTOM = LEGEND_LINE_PX;
 
 class WeatherHourly extends Component {
