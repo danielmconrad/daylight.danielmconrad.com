@@ -83,7 +83,10 @@ class App extends Component {
   }
 
   getToken() {
-    return this.props.params.token || this.props.location.query.token;
+    return this.props.params.token
+      || this.props.location.query.token
+      || this.props.params.key
+      || this.props.location.query.key;
   }
 
   getUnits() {

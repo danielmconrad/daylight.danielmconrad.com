@@ -23,9 +23,9 @@
 }
 
 :local .clear {
-  background: #648788;
-  background: radial-gradient(center, ellipse cover, #648788 0%, #435657 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#648788', endColorstr='#435657', GradientType=1 );
+  background: #f8ce6d;
+  background: radial-gradient(center, ellipse cover, #f8ce6d 0%, #f4aa00 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8ce6d', endColorstr='#f4aa00', GradientType=1 );
 }
 
 :local .rain {
@@ -35,9 +35,9 @@
 }
 
 :local .weekend {
-  background: #cf343f;
-  background: radial-gradient(center, ellipse cover, #cf343f 0%, #842129 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cf343f', endColorstr='#842129', GradientType=1 );
+  background: #648788;
+  background: radial-gradient(center, ellipse cover, #648788 0%, #435657 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#648788', endColorstr='#435657', GradientType=1 );
 }
 
 :local .DateTime,
