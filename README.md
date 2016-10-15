@@ -1,7 +1,7 @@
 # Daylight
 A soothing way to wake up to the time and weather.
 
-![Daylight Preview]()
+![Daylight Preview](http://i.imgur.com/a7lgpxd.jpg)
 
 ### Features
 * Responsive vertical orientation (horizontal coming soon!) to allow for any resolution TV.
