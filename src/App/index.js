@@ -117,8 +117,14 @@ class App extends Component {
   }
 
   render() {
-    const conditionsClass = this.getConditionsClassName();
-    const appClassNames = [styles.App, conditionsClass];
+    const appClassNames = [styles.App, this.getConditionsClassName()];
+
+    const { showLocation } = this.props.location.query;
+    let weatherConditionsClass = [styles.WeatherConditions];
+
+    if (showLocation) {
+      weatherConditionsClass.push(styles.WeatherConditionsWithLocation);
+    }
 
     const token = this.getToken();
     const units = this.getUnits();
@@ -133,9 +139,11 @@ class App extends Component {
           <div className={styles.container}>
             <DateTime
               className={styles.DateTime}
+              units={units}
             />
             <WeatherConditions
-              className={styles.WeatherConditions}
+              className={weatherConditionsClass.join(' ')}
+              showLocation={!!showLocation}
               units={units}
               weather={conditions}
             />

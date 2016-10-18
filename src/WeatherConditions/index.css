@@ -10,3 +10,8 @@
   margin-top: -0.2em;
   vertical-align: middle;
 }
+
+:local .location {
+  font-size: 0.4em !important;
+  opacity: 0.5;
+}

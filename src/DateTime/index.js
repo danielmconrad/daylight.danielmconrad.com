@@ -7,10 +7,12 @@ class DateTime extends Component {
 
   static propTypes = {
     className: React.PropTypes.string,
+    units: React.PropTypes.oneOf(['metric', 'imperial']),
   };
 
   static defaultProps = {
     className: '',
+    units: 'imperial',
   };
 
   constructor() {
@@ -37,6 +39,13 @@ class DateTime extends Component {
     clearInterval(this.setTime);
   }
 
+  getDateFormat() {
+    switch (this.props.units) {
+      case 'imperial': return 'dddd, MMMM Do';
+      default: return 'dddd, Do MMMM';
+    }
+  }
+
   render() {
     const { momentTime, isHalfTick } = this.state;
     let seperatorClassNames = [styles.seperator];
@@ -46,7 +55,7 @@ class DateTime extends Component {
     return (
       <div className={[styles.DateTime, this.props.className].join(' ')}>
         <div className={styles.date}>
-          {momentTime.format('dddd, MMMM Do')}
+          {momentTime.format(this.getDateFormat())}
         </div>
         <div className={styles.time}>
           {momentTime.format('h')}

@@ -15,7 +15,7 @@ class WeatherHourly extends Component {
 
   static propTypes = {
     className: React.PropTypes.string,
-    units: React.PropTypes.oneOf(['celcius', 'imperial']),
+    units: React.PropTypes.oneOf(['metric', 'imperial']),
     weather: React.PropTypes.object,
   };
 
@@ -28,9 +28,9 @@ class WeatherHourly extends Component {
   getHours() {
     if(!this.props.weather || !this.props.weather.hourly_forecast) return [];
 
-    const isCelcius = this.props.units === 'celcius';
-    const unitFormat = isCelcius ? 'C' : 'F';
-    const unitKey = isCelcius ? 'metric' : 'english';
+    const isMetric = this.props.units === 'metric';
+    const unitFormat = isMetric ? 'C' : 'F';
+    const unitKey = isMetric ? 'metric' : 'english';
 
     return this.props.weather.hourly_forecast.map((hour, index) => {
       const temp = parseInt(hour.temp[unitKey], 10);
