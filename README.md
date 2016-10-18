@@ -17,3 +17,12 @@ https://danmconrad.github.io/daylight/?key=YOUR_API_KEY
 
 ### Creating a kiosk w/ a Raspberry Pi
 Check out the Daylight Kiosk [installation instructions](https://github.com/danmconrad/daylight-kiosk) to turn a TV+Pi into a monitor that automatically turns on and off.
+
+### Query Params
+| Param | Values | Default | Description |
+| ----- | ------ | ------- | ----------- |
+| key | string | null | Wunderground API Key |
+| showLocation | 'true', 'false' | false | Will show the autodetected or forced location |
+| token | string | null | Alias for 'key' parameter |
+| units | 'metric', 'imperial' | 'imperial' | Will show temperatures as F/C, and change the date format |
+| zipCode | string | null | A forced location instead of autodetection |
