@@ -11,9 +11,32 @@ A soothing way to wake up to the time and weather.
 * Hourly forecast updates every hour.
 * The site will automatically reload every 24 hours to make sure the latest code is always available.
 
-### Setup
+### Usage
 Create a free api account at [Weather Underground](https://www.wunderground.com/weather/api/d/pricing.html) and simply use that key in the url below:
 https://danmconrad.github.io/daylight/?key=YOUR_API_KEY
+
+### Development
+
+#### Setup 
+To install and run the dev server:
+```bash
+$ git clone https://github.com/danmconrad/daylight.git
+$ cd daylight
+$ npm install
+$ npm start
+```
+
+#### Build & Deploy
+After making changes to the repo:
+```bash
+$ git add . && git commit -am "feat: my cool feature"
+$ npm run build
+$ git add . && git commit -am "chore: build"
+$ git push origin
+$ npm run deploy
+```
+
+The deploy process will checkout a new branch names `gh-pages` and include only the `dist` folder contents in that branch. It will then push up those changes to a remote version of `gh-pages`. Your site is now accessible at http://USERNAME.github.io/daylight.
 
 ### Creating a kiosk w/ a Raspberry Pi
 Check out the Daylight Kiosk [installation instructions](https://github.com/danmconrad/daylight-kiosk) to turn a TV+Pi into a monitor that automatically turns on and off.
