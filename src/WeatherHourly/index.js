@@ -89,6 +89,7 @@ class WeatherHourly extends Component {
   render() {
     const temperatures = this.getTemperatures();
     const precipitations = this.getPrecipitations();
+    const showLegendLine = false;
 
     if (!temperatures && !precipitations) return null;
 
@@ -100,13 +101,15 @@ class WeatherHourly extends Component {
 
         {/* LEGEND */}
         <g className={styles.legend}>
-          <line
-            id="bottom-line"
-            x1="-20"
-            x2="980"
-            y1={LEGEND_LINE_PX}
-            y2={LEGEND_LINE_PX}
-          />
+          {showLegendLine &&
+            <line
+              id="bottom-line"
+              x1="-20"
+              x2="980"
+              y1={LEGEND_LINE_PX}
+              y2={LEGEND_LINE_PX}
+            />
+          }
           {temperatures.map(({ x, y, mDate }, i) => {
             return <text
               key={i}
