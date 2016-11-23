@@ -12,6 +12,7 @@ import hourlyStub from './stubs/hourly';
 
 const ONE_MINUTE = 1000 * 60;
 const ONE_HOUR = 60 * ONE_MINUTE;
+const PRECIPITATION_PERCENTAGE_THRESHOLD = 5.0;
 
 const IS_DEV = process.env.NODE_ENV !== 'production';
 const WEATHER_API = 'https://api.wunderground.com/api';
@@ -94,7 +95,7 @@ class App extends Component {
   }
 
   getConditionsClassName() {
-    const willPrecipitate = this.getWillPrecipSoon();
+    const willPrecipitate = this.getWillPrecipitateSoon();
     const isWeekend = moment().day() === 0 || moment().day() === 6;
 
     switch (true) {
@@ -104,13 +105,15 @@ class App extends Component {
     }
   }
 
-  getWillPrecipSoon() {
+  getWillPrecipitateSoon() {
     if (!this.state.hourly) return false;
 
     let willPrecipitate = false;
 
     this.state.hourly.hourly_forecast.slice(0, 12).forEach((hour) => {
-      if (parseFloat(hour.pop, 10) > 0) willPrecipitate = true;
+      if (parseFloat(hour.pop, 10) > PRECIPITATION_PERCENTAGE_THRESHOLD) {
+        willPrecipitate = true;
+      }
     });
 
     return willPrecipitate;
