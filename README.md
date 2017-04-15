@@ -13,7 +13,7 @@ A soothing way to wake up to the time and weather.
 
 ### Usage
 Create a free api account at [Weather Underground](https://www.wunderground.com/weather/api/d/pricing.html) and simply use that key in the url below:
-https://danmconrad.github.io/daylight/?key=YOUR_API_KEY
+http://daylight.danmconrad.com/?token=YOUR_API_KEY
 
 ### Development
 
