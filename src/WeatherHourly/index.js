@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import styles from './index.css';
@@ -14,9 +15,9 @@ const PRECIP_BOTTOM = LEGEND_LINE_PX;
 class WeatherHourly extends Component {
 
   static propTypes = {
-    className: React.PropTypes.string,
-    units: React.PropTypes.oneOf(['metric', 'imperial']),
-    weather: React.PropTypes.object,
+    className: PropTypes.string,
+    units: PropTypes.oneOf(['metric', 'imperial']),
+    weather: PropTypes.object,
   };
 
   static defaultProps = {

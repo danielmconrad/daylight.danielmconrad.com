@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 import WeatherIcon from '../WeatherIcon';
 import styles from './index.css';
@@ -6,15 +7,13 @@ import styles from './index.css';
 class WeatherConditions extends Component {
 
   static propTypes = {
-    className: React.PropTypes.string,
-    showLocation: React.PropTypes.bool,
-    units: React.PropTypes.oneOf(['metric', 'imperial']),
-    weather: React.PropTypes.object,
+    className: PropTypes.string,
+    units: PropTypes.oneOf(['metric', 'imperial']),
+    weather: PropTypes.object,
   };
 
   static defaultProps = {
     className: '',
-    showLocation: false,
     units: 'imperial',
     weather: null,
   };
@@ -33,7 +32,7 @@ class WeatherConditions extends Component {
   render() {
     if (!this.props.weather) return null;
 
-    const { icon, display_location } = this.props.weather.current_observation;
+    const {icon, display_location} = this.props.weather.current_observation;
 
     return (
       <div className={[styles.WeatherConditions, this.props.className].join(' ')}>
@@ -44,11 +43,9 @@ class WeatherConditions extends Component {
           />
           &nbsp;
           {this.getTemperature()}°{this.getUnits()}
-          {this.props.showLocation &&
-            <div className={styles.location}>
-              {display_location.full}
-            </div>
-          }
+          <div className={styles.location}>
+            {display_location.full}
+          </div>
         </div>
       </div>
     );

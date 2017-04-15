@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import {parse as parseSearch} from 'querystring';
 import moment from 'moment';
 
 import styles from './index.css';
@@ -48,6 +49,10 @@ class App extends Component {
     clearInterval(this.setHourly);
   }
 
+  getQuery() {
+    return parseSearch(this.props.location.search.substring(1));
+  }
+
   refreshSite() {
     window.location.reload();
   }
@@ -73,7 +78,7 @@ class App extends Component {
   }
 
   getWeatherEndpoints() {
-    const location = this.props.location.query.zipCode || 'autoip';
+    const location = this.props.zipCode || 'autoip';
     const token = this.getToken();
 
     return {
@@ -84,14 +89,11 @@ class App extends Component {
   }
 
   getToken() {
-    return this.props.params.token
-      || this.props.location.query.token
-      || this.props.params.key
-      || this.props.location.query.key;
+    return this.getQuery().token;
   }
 
   getUnits() {
-    return this.props.location.query.units || 'imperial';
+    return this.getQuery().units || 'imperial';
   }
 
   getConditionsClassName() {
@@ -121,18 +123,9 @@ class App extends Component {
 
   render() {
     const appClassNames = [styles.App, this.getConditionsClassName()];
-
-    const { showLocation } = this.props.location.query;
-    let weatherConditionsClass = [styles.WeatherConditions];
-
-    if (showLocation) {
-      weatherConditionsClass.push(styles.WeatherConditionsWithLocation);
-    }
-
     const token = this.getToken();
     const units = this.getUnits();
-
-    const { conditions, hourly } = this.state;
+    const {conditions, hourly} = this.state;
 
     return (
       <div className={appClassNames.join(' ')}>
@@ -145,8 +138,7 @@ class App extends Component {
               units={units}
             />
             <WeatherConditions
-              className={weatherConditionsClass.join(' ')}
-              showLocation={!!showLocation}
+              className={styles.WeatherConditions}
               units={units}
               weather={conditions}
             />

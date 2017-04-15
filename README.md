@@ -44,8 +44,7 @@ Check out the Daylight Kiosk [installation instructions](https://github.com/danm
 ### Query Params
 | Param | Values | Default | Description |
 | ----- | ------ | ------- | ----------- |
-| key | string | null | Wunderground API Key |
 | showLocation | 'true', 'false' | false | Will show the autodetected or forced location |
-| token | string | null | Alias for 'key' parameter |
+| token | string | null | Wunderground API Key |
 | units | 'metric', 'imperial' | 'imperial' | Will show temperatures as F/C, and change the date format |
 | zipCode | string | null | A forced location instead of autodetection |

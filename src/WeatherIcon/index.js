@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class WeatherIcon extends Component {
 
   static propTypes = {
-    className: React.PropTypes.string,
-    icon: React.PropTypes.string,
+    className: PropTypes.string,
+    icon: PropTypes.string,
   };
 
   static defaultProps = {

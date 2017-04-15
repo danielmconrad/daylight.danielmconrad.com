@@ -1,20 +1,84 @@
 :local .App {
-  padding: 1em 0.5em;
-  height: calc(100% - 2em);
-  width: calc(100% - 1em);
-  font-size: 4rem;
 }
 
-@media (min-width: 320px) { :local .App { font-size: 6rem; } }
-@media (min-width: 375px) { :local .App { font-size: 8rem; } }
-@media (min-width: 520px) { :local .App { font-size: 11rem; } }
-@media (min-width: 768px) { :local .App { font-size: 14rem; } }
-@media (min-width: 800px) { :local .App { font-size: 16rem; } }
-@media (min-width: 1080px) { :local .App { font-size: 18rem; } }
-@media (min-width: 1280px) { :local .App { font-size: 22rem; } }
-@media (min-width: 1440px) { :local .App { font-size: 27rem; } }
-@media (min-width: 1920px) { :local .App { font-size: 31rem; } }
-@media (min-width: 2160px) { :local .App { font-size: 36rem; } }
+:local .DateTime,
+:local .WeatherConditions,
+:local .WeatherHourly {
+  position: absolute;
+  width: 100%;
+}
+
+:local .DateTime {
+  top: 0;
+}
+
+:local .WeatherHourly {
+  font-size: 0.2em;
+  bottom: 0;
+  max-height: 50%;
+}
+
+
+@media (orientation: landscape) {
+  :local .App {
+    padding: 0.5em 0.5em;
+    height: calc(100% - 1em);
+    width: calc(100% - 1em);
+    font-size: 2rem;
+  }
+
+  :local .DateTime,
+  :local .WeatherConditions {
+    width: 50%;
+  }
+
+  :local .DateTime {
+    left: 0;
+    line-height: 1.2em;
+  }
+
+  :local .WeatherConditions {
+    font-size: 0.7em;
+    right: 0%;
+  }
+}
+
+@media (orientation: landscape) and (min-width: 320px) { :local .App { font-size: 4rem; } }
+@media (orientation: landscape) and (min-width: 375px) { :local .App { font-size: 6rem; } }
+@media (orientation: landscape) and (min-width: 520px) { :local .App { font-size: 9rem; } }
+@media (orientation: landscape) and (min-width: 768px) { :local .App { font-size: 12rem; } }
+@media (orientation: landscape) and (min-width: 800px) { :local .App { font-size: 14rem; } }
+@media (orientation: landscape) and (min-width: 1080px) { :local .App { font-size: 16rem; } }
+@media (orientation: landscape) and (min-width: 1280px) { :local .App { font-size: 18rem; } }
+@media (orientation: landscape) and (min-width: 1440px) { :local .App { font-size: 20rem; } }
+@media (orientation: landscape) and (min-width: 1920px) { :local .App { font-size: 22rem; } }
+@media (orientation: landscape) and (min-width: 2160px) { :local .App { font-size: 24rem; } }
+
+@media (orientation: portrait) {
+  :local .App {
+    padding: 1em 0.5em;
+    height: calc(100% - 2em);
+    width: calc(100% - 1em);
+    font-size: 4rem;
+  }
+
+  :local .WeatherConditions {
+    font-size: 0.83em;
+    top: 50%;
+    margin-top: -1em !important;
+  }
+}
+
+@media (orientation: portrait) and (min-width: 320px) { :local .App { font-size: 6rem; } }
+@media (orientation: portrait) and (min-width: 375px) { :local .App { font-size: 8rem; } }
+@media (orientation: portrait) and (min-width: 520px) { :local .App { font-size: 11rem; } }
+@media (orientation: portrait) and (min-width: 768px) { :local .App { font-size: 14rem; } }
+@media (orientation: portrait) and (min-width: 800px) { :local .App { font-size: 16rem; } }
+@media (orientation: portrait) and (min-width: 1080px) { :local .App { font-size: 18rem; } }
+@media (orientation: portrait) and (min-width: 1280px) { :local .App { font-size: 22rem; } }
+@media (orientation: portrait) and (min-width: 1440px) { :local .App { font-size: 27rem; } }
+@media (orientation: portrait) and (min-width: 1920px) { :local .App { font-size: 31rem; } }
+@media (orientation: portrait) and (min-width: 2160px) { :local .App { font-size: 36rem; } }
 
 :local .container {
   position: relative;
@@ -38,32 +102,6 @@
   background: #648788;
   background: radial-gradient(center, ellipse cover, #648788 0%, #435657 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#648788', endColorstr='#435657', GradientType=1 );
-}
-
-:local .DateTime,
-:local .WeatherConditions,
-:local .WeatherHourly {
-  position: absolute;
-  width: 100%;
-}
-
-:local .DateTime {
-  top: 0;
-}
-
-:local .WeatherConditions {
-  font-size: 0.83em;
-  margin-top: -0.5em;
-  top: 50%;
-}
-
-:local .WeatherConditionsWithLocation {
-  margin-top: -1em !important;
-}
-
-:local .WeatherHourly {
-  font-size: 0.2em;
-  bottom: 0;
 }
 
 :local .noToken {

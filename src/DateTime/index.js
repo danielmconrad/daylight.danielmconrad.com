@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import styles from './index.css';
@@ -6,8 +7,8 @@ import styles from './index.css';
 class DateTime extends Component {
 
   static propTypes = {
-    className: React.PropTypes.string,
-    units: React.PropTypes.oneOf(['metric', 'imperial']),
+    className: PropTypes.string,
+    units: PropTypes.oneOf(['metric', 'imperial']),
   };
 
   static defaultProps = {
