@@ -88,19 +88,19 @@
 
 :local .clear {
   background: #f8ce6d;
-  background: radial-gradient(center, ellipse cover, #f8ce6d 0%, #f4aa00 100%);
+  background: radial-gradient(ellipse at center, #f8ce6d 0%, #f4aa00 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8ce6d', endColorstr='#f4aa00', GradientType=1 );
 }
 
 :local .rain {
   background: #3b6784;
-  background: radial-gradient(center, ellipse cover, #3b6784 0%, #254255 100%);
+  background: radial-gradient(ellipse at center, #3b6784 0%, #254255 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b6784', endColorstr='#254255', GradientType=1 );
 }
 
 :local .weekend {
   background: #648788;
-  background: radial-gradient(center, ellipse cover, #648788 0%, #435657 100%);
+  background: radial-gradient(ellipse at center, #648788 0%, #435657 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#648788', endColorstr='#435657', GradientType=1 );
 }
 
