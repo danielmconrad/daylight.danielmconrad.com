@@ -78,7 +78,7 @@ class App extends Component {
   }
 
   getWeatherEndpoints() {
-    const location = this.props.zipCode || 'autoip';
+    const location = this.getQuery().zipCode || 'autoip';
     const token = this.getToken();
 
     return {
