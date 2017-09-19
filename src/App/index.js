@@ -20,7 +20,7 @@ const WEATHER_API = 'https://api.wunderground.com/api';
 
 class App extends Component {
 
-  constructor() {
+  constructor(props) {
     super();
     this.refreshSite = this.refreshSite.bind(this);
     this.setConditions = this.setConditions.bind(this);
@@ -28,12 +28,16 @@ class App extends Component {
 
     this.state = {
       conditions: null,
-      hourly: null,
+      hourly: null
     };
   }
 
+  componentWillMount() {
+    this.setState({ params: this.getParams() });
+  }
+
   componentDidMount() {
-    if(!this.getToken() && !IS_DEV) return;
+    if(!this.state.params.token && !IS_DEV) return;
 
     setInterval(this.refreshSite, 24 * ONE_HOUR);
     setInterval(this.setConditions, 10 * ONE_MINUTE);
@@ -49,8 +53,19 @@ class App extends Component {
     clearInterval(this.setHourly);
   }
 
-  getQuery() {
-    return parseSearch(this.props.location.search.substring(1));
+  getParams() {
+    return {
+      token: this.getCookie('x-daylight-token'),
+      units: this.getCookie('x-daylight-units'),
+      zipCode: this.getCookie('x-daylight-zipCode'),
+      ...parseSearch(this.props.location.search.substring(1))
+    };
+  }
+
+  getCookie(name) {
+    const cookies = document.cookie.split(';');
+    const cookie = cookies.filter(c => c.trim().startsWith(name))[0];
+    return cookie ? cookie.trim().substring(name.length + 1) : null;
   }
 
   refreshSite() {
@@ -78,7 +93,7 @@ class App extends Component {
   }
 
   getWeatherEndpoints() {
-    const location = this.getQuery().zipCode || 'autoip';
+    const location = this.state.params.zipCode || 'autoip';
     const token = this.getToken();
 
     return {
@@ -89,11 +104,11 @@ class App extends Component {
   }
 
   getToken() {
-    return this.getQuery().token;
+    return this.state.params.token;
   }
 
   getUnits() {
-    return this.getQuery().units || 'imperial';
+    return this.state.params.units || 'imperial';
   }
 
   getConditionsClassName() {
