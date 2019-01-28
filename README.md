@@ -1,9 +1,11 @@
 # Daylight
+
 A soothing way to wake up to the time and weather.
 
 ![Daylight Preview](http://i.imgur.com/a7lgpxd.jpg)
 
-### Features
+## Features
+
 * Responsive vertical orientation (horizontal coming soon!) to allow for any resolution TV.
 * **Blue** when it's about to rain, **Grey** on the weekend, **Yellow** otherwise.
 * 12-hour chart, including precipitation.
@@ -11,23 +13,28 @@ A soothing way to wake up to the time and weather.
 * Hourly forecast updates every hour.
 * The site will automatically reload every 24 hours to make sure the latest code is always available.
 
-### Usage
+## Usage
+
 Create a free api account at [Weather Underground](https://www.wunderground.com/weather/api/d/pricing.html) and simply use that key in the url below:
-http://daylight.danmconrad.com/?token=YOUR_API_KEY
+http://daylight.danielmconrad.com/?token=YOUR_API_KEY
 
-### Development
+## Development
 
-#### Setup 
+### Setup 
+
 To install and run the dev server:
+
 ```bash
-$ git clone https://github.com/danmconrad/daylight.git
+$ git clone https://github.com/danielmconrad/daylight.git
 $ cd daylight
 $ npm install
 $ npm start
 ```
 
-#### Build & Deploy
+### Build & Deploy
+
 After making changes to the repo:
+
 ```bash
 $ git add . && git commit -am "feat: my cool feature"
 $ npm run build
@@ -38,10 +45,12 @@ $ npm run deploy
 
 The deploy process will checkout a new branch names `gh-pages` and include only the `dist` folder contents in that branch. It will then push up those changes to a remote version of `gh-pages`. Your site is now accessible at http://USERNAME.github.io/daylight.
 
-### Creating a kiosk w/ a Raspberry Pi
-Check out the Daylight Kiosk [installation instructions](https://github.com/danmconrad/daylight-kiosk) to turn a TV+Pi into a monitor that automatically turns on and off.
+## Creating a kiosk w/ a Raspberry Pi
 
-### Query Params
+Check out the Daylight Kiosk [installation instructions](https://github.com/danielmconrad/daylight-kiosk) to turn a TV+Pi into a monitor that automatically turns on and off.
+
+## Query Params
+
 | Param | Values | Default | Description |
 | ----- | ------ | ------- | ----------- |
 | showLocation | 'true', 'false' | false | Will show the autodetected or forced location |
